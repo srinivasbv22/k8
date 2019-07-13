@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ${IMAGE_NAME}
+          image: srinivasbv22/guns:latest
           imagePullPolicy: Always
           env:
             - name: DATABASE_URL
