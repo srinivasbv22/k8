@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: gunsui
+spec:
+  replicas: 2
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      role: gunsroleui
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: gunsui
+      labels:
+        app: java
+        role: gunsroleui
+        version: v1
+    spec:
+      containers:
+        - name: app
+          image: srinivasbv22/guns:27
+          imagePullPolicy: Always
+          env:
+            - name: guns-ui-deployment.yml
+              value: database
+            - name: DATABASE_USERNAME
+              value: root
+            - name: DATABASE_PASSWORD
+              value: root
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 20
