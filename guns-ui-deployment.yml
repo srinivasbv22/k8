@@ -20,10 +20,10 @@ spec:
     spec:
       containers:
         - name: app
-          image: srinivasbv22/guns:27
+          image: ${IMAGE_NAME}
           imagePullPolicy: Always
           env:
-            - name: guns-ui-deployment.yml
+            - name: DATABASE_URL
               value: database
             - name: DATABASE_USERNAME
               value: root
